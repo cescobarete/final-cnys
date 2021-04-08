@@ -1,4 +1,16 @@
 // imports
+/*var mysql = require('mysql');
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "myuser",
+    password: "mypass"
+});
+
+con.connect(function(err)) {
+    if (err) throw err;
+    console.log("Connected");
+}*/
+
 const express = require('express')
 const app = express()
 const port = 3000
