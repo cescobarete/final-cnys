@@ -18,7 +18,7 @@ CREATE TABLE Store (
     item varchar(100),
     category varchar(100),
     FOREIGN KEY(cID) REFERENCES Customer(cID),
-    FOREIGN KEY(hID) REFERENCES Link(pID));
+    FOREIGN KEY(hID) REFERENCES Link(hID)
 );
 
 CREATE TABLE Link (
