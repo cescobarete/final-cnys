@@ -1,19 +1,21 @@
 // imports
-/*var mysql = require('mysql');
-var con = mysql.createConnection({
+const express = require('express')
+const mysql = require('mysql');
+const app = express()
+const port = 3001
+
+const con = mysql.createConnection({
     host: "localhost",
-    user: "myuser",
-    password: "mypass"
+    user: "ms_user_two",
+    password: "manageuser",
+    database: "CustomerDb"
 });
 
-con.connect(function(err)) {
-    if (err) throw err;
-    console.log("Connected");
-}*/
-
-const express = require('express')
-const app = express()
-const port = 3000
+con.connect((err) => {
+    if (err) {
+        console.log('Connection established to MySql');
+    }
+});
 
 // static Files
 app.use(express.static('./public'))

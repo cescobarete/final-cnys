@@ -19,9 +19,11 @@
   "homepage": "https://github.com/cescobarete/express-node2#readme",
   "dependencies": {
     "ejs": "^3.1.6",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "keywords": []
 }
