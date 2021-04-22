@@ -1,7 +1,81 @@
 <html>
+    <header><img src="img/FiveStarWebLogo.png" alt="Logo"></header>
     <head>
         <style>
-            
+        body {
+            margin: 0;
+            padding: 5px, 10px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat';
+            font-weight: bold;
+            text-align: center;
+            background: #242582;
+            color: white;
+          }
+        
+        p {
+            font-family: 'Ubuntu';
+            font-weight: bold;
+            text-align: center;
+            background: #553D67;
+            color: white;
+        }
+        table{
+            font-family: 'Ubuntu';
+            width: 100%;
+
+        }
+        td,th{
+            border: 1px solid #99738E;
+            text-align: center;
+            padding: 8px;
+        }
+        #logo{
+            vertical-align: left;
+        }
         </style>
     </head>
+
+    <body>
+        <h1>FiveStarWeb</h1>
+        <h3>Welcome to FiveStarWeb</br></h3>
+
+        <form method="post" action-xhr="/submit" class="main"> 
+            <div class="input">
+              <center><label for="form-name">Name:</label>
+                  <input type="text" name="name" id="form-name" required>
+              </center>
+            </div>
+            <div class="input">
+               <center><label for="form-id">ID:</label>
+                   <input type="id" name="id" id="form-id" required>
+            <br><input type="Submit" value="Subscribe" class="btn"></center>
+            </div>
+        </form>
+
+
+        <p>Customer Information</p>
+        <table>
+            <tr>
+                <th>Customer Name:</th>
+                <th>Customer ID/cID</th>
+            </tr>
+            <tr>
+                <td id="form-name"></td>
+                <td id="form-id"></td>
+            </tr>
+
+        </table> 
+        <p>Customer Product Information</p>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>cID</th>
+            </tr>
+        </table> 
+        
+<footer><p>Created By: Sarah Mahram, Christian Escobarte, Nick Spirakis, and Yasir</p></footer>
+
 </html>
