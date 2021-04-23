@@ -18,9 +18,12 @@
   },
   "homepage": "https://github.com/cescobarete/express-node2#readme",
   "dependencies": {
+    "@azure/cosmos": "^3.11.0",
+    "azure-storage": "^2.10.3",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "shortid": "^2.2.16"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

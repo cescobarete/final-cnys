@@ -1,21 +1,7 @@
 // imports
 const express = require('express')
-const mysql = require('mysql');
 const app = express()
-const port = 3001
-
-const con = mysql.createConnection({
-    host: "localhost",
-    user: "ms_user_two",
-    password: "manageuser",
-    database: "CustomerDb"
-});
-
-con.connect((err) => {
-    if (err) {
-        console.log('Connection established to MySql');
-    }
-});
+const port = 3000
 
 // static Files
 app.use(express.static('./public'))
