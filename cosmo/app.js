@@ -6,10 +6,11 @@ const dbContext = require("./data/databaseContext");
 //  </ImportConfiguration>
 
 //  <DefineNewItem>
-const newItem = {
-  id: "1006",
-  name: "Snip"
+ const newItem = {
+  id: "1008",
+  name: "Mike"
 };
+
 //  </DefineNewItem>
 
 async function main() {
