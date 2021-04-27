@@ -1,3 +1,5 @@
+<!doctype html>
+
 <html>
     <header><img src="img/FiveStarWebLogo.png" alt="Logo"></header>
     <head>
@@ -34,6 +36,18 @@
         #logo{
             vertical-align: left;
         }
+        .button{
+            border: none;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            display:inline-block;
+        }
+        .Submit{background-color: #242582;}
+        .Update{background-color: #242582;}
+        .Delete{background-color: #242582;}
+        .Enter{background-color: #242582; color: white; font-size: 16px;}
+
         </style>
     </head>
 
@@ -41,32 +55,23 @@
         <h1>FiveStarWeb</h1>
         <h3>Welcome to FiveStarWeb</br></h3>
 
-        <form method="post" action-xhr="/submit" class="main"> 
-            <div class="input">
-              <center><label for="form-name">Name:</label>
-                  <input type="text" name="name" id="form-name" required>
-              </center>
-            </div>
-            <div class="input">
-               <center><label for="form-id">ID:</label>
-                   <input type="id" name="id" id="form-id" required>
-            <br><input type="Submit" value="Subscribe" class="btn"></center>
-            </div>
-        </form>
-
-
         <p>Customer Information</p>
-        <table>
-            <tr>
-                <th>Customer Name:</th>
-                <th>Customer ID/cID</th>
-            </tr>
-            <tr>
-                <td id="form-name"></td>
-                <td id="form-id"></td>
-            </tr>
-
-        </table> 
+                  
+            <table>
+                <tr>
+                    <th>Customer Name:</th>
+                    <th>Customer ID/cID</th>
+                </tr>
+                <tr>
+                    <td id="form-name"></td>
+                    <td id="form-id"></td>
+                </tr>  
+            </table>
+            
+        <form>
+            <center><button class=Enter onclick="customerInfo()">Enter</button></center>
+        </form>
+        
         <p>Customer Product Information</p>
         <table>
             <tr>
@@ -75,7 +80,15 @@
                 <th>cID</th>
             </tr>
         </table> 
-        
+
+        <form>
+            <center><button class="button Submit">Submit</button></center>
+            <center><button class="button Update">Update</button></center>
+            <center><button class="button Delete">Delete</button></center>
+        </form> 
+    </body> 
+ 
 <footer><p>Created By: Sarah Mahram, Christian Escobarte, Nick Spirakis, and Yasir</p></footer>
 
 </html>
+

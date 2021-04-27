@@ -5,10 +5,17 @@ const dbContext = require("./data/databaseContext");
 //  </ImportConfiguration>
 
 //  <DefineNewItem>
+<<<<<<< HEAD:final-prod/production/cosmo/app.js
 const newItem = {
   id: "1012",
   name: "Dylan"
+=======
+ const newItem = {
+  id: "1008",
+  name: "Mike"
+>>>>>>> de16a57de8e2deb62019cc459034b5b65a65328b:cosmo/app.js
 };
+
 //  </DefineNewItem>
 
 async function main() {
