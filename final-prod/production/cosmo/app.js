@@ -1,4 +1,3 @@
-// @ts-check
 //  <ImportConfiguration>
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 const config = require("./config");
@@ -7,8 +6,8 @@ const dbContext = require("./data/databaseContext");
 
 //  <DefineNewItem>
 const newItem = {
-  id: "1006",
-  name: "Snip"
+  id: "1012",
+  name: "Dylan"
 };
 //  </DefineNewItem>
 
