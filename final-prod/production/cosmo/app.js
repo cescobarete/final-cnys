@@ -5,8 +5,10 @@ const dbContext = require("./data/databaseContext");
 
 // Define new item
 const newItem = {
-  id: "1013",
-  name: "Chris"
+  id: "2",
+  name: "Sarah"
+  item: "T-shirt"
+  category: "Clothing"
 };
 
 //Async is a utility module which provides straight-forward, 
@@ -40,7 +42,7 @@ async function main() {
       .fetchAll();
 
     items.forEach(item => {
-      console.log(`${item.id} - ${item.name}`);
+      console.log(`${item.id} - ${item.name} - ${item.item} - ${item.category}`);
     });
     // </QueryItems>
     
@@ -50,7 +52,7 @@ async function main() {
      */
     const { resource: createdItem } = await container.items.create(newItem);
     
-    console.log(`\r\nCreated new item: ${createdItem.id} - ${createdItem.name}\r\n`);
+    console.log(`\r\nCreated new item: ${createdItem.id} - ${createdItem.name} - ${createdItem.item} - ${createdItem.category}\r\n`);
     // </CreateItem>
     
     // <UpdateItem>
@@ -58,7 +60,7 @@ async function main() {
      * Pull the id and partition key value from the newly created item.
      * Update the isComplete field to true.
      */
-    const { id, name } = createdItem;
+    const { id, name, item, category } = createdItem;
 
     const { resource: updatedItem } = await container
       .item(id, name)
