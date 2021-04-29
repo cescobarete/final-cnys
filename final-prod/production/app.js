@@ -4,11 +4,18 @@ const CosmosClient = require("@azure/cosmos").CosmosClient;
 const config = require("./config");
 const dbContext = require("./data/databaseContext");
 const app = express();
+const handlebars = require("express-handlebars")
+
+app.engine(".handlebars", handlebars({
+  defaultlayout: "main"
+}));
+
+app.set("view engine", "handlebars");
 
 // Define new item
 const newItem = {
-  id: "1018",
-  name: "Samantha"
+  id: "1019",
+  name: "Sama"
 };
 
 //Async is a utility module which provides straight-forward, 
@@ -88,11 +95,17 @@ app.get("/", (req, res)=> {
 });
 
 app.get("/test/enter", (req, res)=> {
-  res.render("index");
+  const hellp = "hello"
+  main()
+  res.render("index", {
+    a: newItem.id,
+    b: newItem.name
+  });
 });
 
-app.post("/test/enter", (req, res)=> {
-  main();
+app.post("/test/enter", async (req, res)=> {
+  await main();
+  console.log("Posted!!!!")
 });
 
-//app.listen(3000, (req, res) => {});
+app.listen(3001, (req, res) => {});
