@@ -153,9 +153,6 @@ async function mainupdate(newItem) {
     items.forEach(item => {
       console.log(`${item.id} - ${item.name}`);
     });
-
-    const { resource: result } = await container.item(id, name).update();
-
     // </QueryItems>
     
     // <UpdateItem>
@@ -175,7 +172,6 @@ async function mainupdate(newItem) {
     console.log(err.message);
   }
 }
-
 
 app.get("/", (req, res)=> {
   res.sendFile('./index.hsb.html', {root: __dirname})
@@ -208,4 +204,4 @@ app.post("/test/update", async (req, res)=> {
   console.log("Updated!!!!")
 });
 
-app.listen(3000, (req, res) => {});
+app.listen(3001, (req, res) => {});
