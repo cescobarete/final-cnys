@@ -114,12 +114,49 @@ async function maindelete(newItem) {
       console.log(`${item.id} - ${item.name}`);
     });
     // </QueryItems>
+
+    const { id, name } = newItem;
+  
+    const { resource: result } = await container.item(id, name).delete();
+    console.log(`Deleted item with id: ${id}`);
+    // </DeleteItem> */
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+async function mainupdate(newItem) {
+  
+  // Create client object database container
+  const { endpoint, key, databaseId, containerId } = config;
+  const client = new CosmosClient({ endpoint, key });
+  const database = client.database(databaseId);
+  const container = database.container(containerId);
+
+  // Make sure Tasks database is already setup. If not, create it.
+  await dbContext.create(client, databaseId, containerId);
+  // Create client object database container
+  try {
+    // <Query items>
+    console.log(`Querying container: Items`);
+
+    // query to return all items
+    const querySpec = {
+      query: "SELECT * from Customer"
+    };
     
-    // <CreateItem>
-    /** Create new item
-     * newItem is defined at the top of this file
-     */    
-    // </CreateItem>
+    // read all items in the Items container
+    const { resources: items } = await container.items
+      .query(querySpec)
+      .fetchAll();
+
+    items.forEach(item => {
+      console.log(`${item.id} - ${item.name}`);
+    });
+
+    const { resource: result } = await container.item(id, name).update();
+
+    // </QueryItems>
     
     // <UpdateItem>
     /** Update item
@@ -134,19 +171,11 @@ async function maindelete(newItem) {
 
     console.log(`Updated item: ${updatedItem.id} - ${updatedItem.name}`); 
     // </UpdateItem>
-    
-    // <DeleteItem>    
-    /**
-     * Delete item
-     * Pass the id and partition key value to delete the item
-     */
-    const { resource: result } = await container.item(id, name).delete();
-    console.log(`Deleted item with id: ${id}`);
-    // </DeleteItem> */
   } catch (err) {
     console.log(err.message);
   }
 }
+
 
 app.get("/", (req, res)=> {
   res.sendFile('./index.hsb.html', {root: __dirname})
@@ -170,4 +199,13 @@ app.post("/test/delete", async (req, res)=> {
   console.log("Deleted!!!!")
 });
 
-app.listen(3002, (req, res) => {});
+app.get("/test/update", (req, res)=> {
+  res.sendFile('./index.hsb.html', {root: __dirname})
+});
+
+app.post("/test/update", async (req, res)=> {
+  await mainupdate(req.body);
+  console.log("Updated!!!!")
+});
+
+app.listen(3000, (req, res) => {});
