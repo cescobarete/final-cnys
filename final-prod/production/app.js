@@ -5,6 +5,10 @@ const config = require("./config");
 const dbContext = require("./data/databaseContext");
 const app = express();
 const handlebars = require("express-handlebars")
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.engine(".handlebars", handlebars({
   defaultlayout: "main"
@@ -13,20 +17,18 @@ app.engine(".handlebars", handlebars({
 app.set("view engine", "handlebars");
 
 // Define new item
-const newItem = {
-  id: "1019",
-  name: "Sama"
-};
+// const newItem = {
+//   id: "1019",
+//   name: "Sama"
+// };
 
 //Async is a utility module which provides straight-forward, 
 //powerful functions for working with asynchronous JavaScript
-async function main() {
+async function main(newItem) {
   
   // Create client object database container
   const { endpoint, key, databaseId, containerId } = config;
-
   const client = new CosmosClient({ endpoint, key });
-
   const database = client.database(databaseId);
   const container = database.container(containerId);
 
@@ -91,21 +93,21 @@ async function main() {
 }
 
 app.get("/", (req, res)=> {
-  res.send("hello")
+  res.sendFile('./index.hsb.html', {root: __dirname})
 });
 
 app.get("/test/enter", (req, res)=> {
-  const hellp = "hello"
-  main()
-  res.render("index", {
-    a: newItem.id,
-    b: newItem.name
-  });
+  // main()
+  // res.render("index", {
+  //   a: newItem.id,
+  //   b: newItem.name
+  // });
+  res.sendFile('./index.hsb.html', {root: __dirname})
 });
 
 app.post("/test/enter", async (req, res)=> {
-  await main();
+  await main(req.body);
   console.log("Posted!!!!")
 });
 
-app.listen(3001, (req, res) => {});
+app.listen(3002, (req, res) => {});
