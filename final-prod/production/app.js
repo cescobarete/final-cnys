@@ -203,7 +203,6 @@ async function CustomerProd(newItem) {
 
     items.forEach(item => {
       console.log(`${item.Pname} - ${item.Pcategory} -  ${item.Pid}`);
-
     });
 
     const { resource: createdItem } = await container.items.create(newItem);
