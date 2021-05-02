@@ -1,14 +1,14 @@
 <!doctype html>
 
 <html>
-    <header><img src="img/FiveStarWebLogo.png" alt="Logo"></header>
+    <!--<header><img src="FiveStarWebLogo.png" alt="FiveStarWeb"></header><!-->
     <head>
         <style>
         body {
             margin: 0;
             padding: 5px, 10px;
         }
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2 {
             font-family: 'Montserrat';
             font-weight: bold;
             text-align: center;
@@ -23,17 +23,7 @@
             background: #553D67;
             color: white;
         }
-        table{
-            font-family: 'Ubuntu';
-            width: 100%;
-
-        }
-        td,th{
-            border: 1px solid #99738E;
-            text-align: center;
-            padding: 8px;
-        }
-        #logo{
+        img{
             vertical-align: left;
         }
         .button{
@@ -43,28 +33,13 @@
             font-size: 16px;
             display:inline-block;
         }
-        .Submit{background-color: #242582;}
-        .Update{background-color: #242582;}
-        .Delete{background-color: #242582;}
-        .Enter{background-color: #242582; color: white; font-size: 16px;}
 
         </style>
     </head>
 
     <body>
-        <h1>FiveStarWeb</h1>
-        <h3>Welcome to FiveStarWeb</br></h3>
+        <h1>FiveStarWeb <br>Welcome to FiveStarWeb</br></h1>
 
-        <p>Customer Information</p>
-                  
-        
-            
-        <form>
-            <center>
-                <button class=Enter onclick="customerInfo()">Enter</button>
-            </center>
-
-        </form>
         <form action="/test/enter", method = "post">
             <title>Customer Information</title>
             <p>Type your name and ID in the boxes provided below</p>
@@ -79,6 +54,7 @@
         
         <form action="/test/delete", method = "post">
             <title>Delete Customer Information</title>
+            <h2>Delete Customer Information</h2>
             <p>Type the name and ID that you wish to delete in the boxes provided below</p>
 
             <center>Customer Name:<br> <input type="text" id="name" name="name"></center>
@@ -90,26 +66,30 @@
         </form>
 
         <form action="/test/update", method = "post">
-            <title>Delete Customer Information</title>
-            <p>Type the name and ID that you wish to delete in the boxes provided below</p>
-
-            <center>Customer Name:<br> <input type="text" id="name" name="name"></center>
+            <title>Update Customer Information</title>
+            <h2>Update Customer Information</h2>
+            <p>Select the update button to update the data</p>
+            <!--<center>Customer Name:<br> <input type="text" id="name" name="name"></center>
             <br>
             <center>Customer ID:<br> <input type="text" id="id" name="id"></center>
-            <br>
+            <br><!-->
 
             <center><button type=enter>Update</button></center>
         </form>
 
-        <title>Customer Product Information</title>
-        <table>
-            <td></td><br>
-        </table>
-        <!--<form>
-            <center><button class="button Submit">Submit</button></center>
-            <center><button class="button Update">Update</button></center>
-            <center><button class="button Delete">Delete</button></center>
-        </form>-->
+        <form action="/Customer/Product", method = "post">
+            <title>Product Information</title>
+            <h2>Product Information</h2>
+            <p>Type the product name, product category, and product ID in the boxes provided below</p>
+
+            <center>Product Name:<br> <input type="text" id="Pname" name="Pname"></center>
+            <br>
+            <center>Product Category:<br> <input type="text" id="Pcategory" name="Pcategory"></center>
+            <br>
+            <center>Product ID:<br> <input type="text" id="Pid" name="Pid"></center>
+            <br>
+            <center><button type=submit>Submit</button></center>
+        </form>
     </body> 
  
 <footer><p>Created By: Sarah Mahram, Christian Escobarte, Nick Spirakis, and Yasir</p></footer>

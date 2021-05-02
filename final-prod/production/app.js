@@ -46,6 +46,8 @@ async function main(newItem) {
 
     items.forEach(item => {
       console.log(`${item.id} - ${item.name}`);
+      console.log(`${item.Pname} - ${item.Pcategory} -  ${item.Pid}`);
+
     });
     // </QueryItems>
     
@@ -56,6 +58,7 @@ async function main(newItem) {
     const { resource: createdItem } = await container.items.create(newItem);
     
     console.log(`\r\nCreated new item: ${createdItem.id} - ${createdItem.name}\r\n`);
+    console.log(`\r\nCreated new item: ${createdItem.Pname} - ${createdItem.Pcategory} - ${createdItem.Pid} \r\n`);
     // </CreateItem>
     
     // <UpdateItem>
@@ -167,11 +170,51 @@ async function mainupdate(newItem) {
       .replace(newItem);
 
     console.log(`Updated item: ${updatedItem.id} - ${updatedItem.name}`); 
-    // </UpdateItem>
+   //</UpdateItem>
   } catch (err) {
     console.log(err.message);
   }
 }
+
+async function CustomerProd(newItem) {
+  
+  // Create client object database container
+  const { endpoint, key, databaseId, containerId } = config;
+  const client = new CosmosClient({ endpoint, key });
+  const database = client.database(databaseId);
+  const container = database.container(containerId);
+
+  // Make sure Tasks database is already setup. If not, create it.
+  await dbContext.create(client, databaseId, containerId);
+  // Create client object database container
+  try {
+    // <Query items>
+    console.log(`Querying container: Items`);
+
+    // query to return all items
+    const querySpec = {
+      query: "SELECT * from Customer"
+    };
+    
+    // read all items in the Items container
+    const { resources: items } = await container.items
+      .query(querySpec)
+      .fetchAll();
+
+    items.forEach(item => {
+      console.log(`${item.Pname} - ${item.Pcategory} -  ${item.Pid}`);
+
+    });
+
+    const { resource: createdItem } = await container.items.create(newItem);
+    
+    console.log(`\r\nCreated new item: ${createdItem.Pname} - ${createdItem.Pcategory} - ${createdItem.Pid} \r\n`);
+    
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
 
 app.get("/", (req, res)=> {
   res.sendFile('./index.hsb.html', {root: __dirname})
@@ -204,4 +247,14 @@ app.post("/test/update", async (req, res)=> {
   console.log("Updated!!!!")
 });
 
-app.listen(3001, (req, res) => {});
+
+app.get("/Customer/Product", (req, res)=> {
+  res.sendFile('./index.hsb.html', {root: __dirname})
+});
+
+app.post("/Customer/Product", async (req, res)=> {
+  await CustomerProd(req.body);
+  console.log("New Product")
+});
+
+app.listen(3002, (req, res) => {});
