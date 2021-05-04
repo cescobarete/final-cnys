@@ -6,11 +6,13 @@ const dbContext = require("./data/databaseContext");
 const app = express();
 const handlebars = require("express-handlebars")
 const bodyParser = require("body-parser");
-const router = express.Router();
 
+//bodyParse parses in the incoming requests before handling the request
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//handlebars: Used to render web page to the client side 
+//from data on the server-side
 app.engine(".handlebars", handlebars({
   defaultlayout: "main"
 }));
@@ -22,6 +24,7 @@ app.set("view engine", "handlebars");
 async function main(newItem) {
   
   // Create client object database container
+  //Takes the endpoint,key, database name customer-db, and db continer customer
   const { endpoint, key, databaseId, containerId } = config;
   const client = new CosmosClient({ endpoint, key });
   const database = client.database(databaseId);
@@ -35,15 +38,19 @@ async function main(newItem) {
     console.log(`Querying container: Items`);
 
     // query to return all items
+    //Seects all the fields ID, name, pname, pcategory, pid 
+    //and grabs it from the customer container
     const querySpec = {
       query: "SELECT * from Customer"
     };
     
     // read all items in the Items container
+    //takes variable queryspec, gives access to all items in the container
     const { resources: items } = await container.items
       .query(querySpec)
       .fetchAll();
-
+    
+    //Display each item in console
     items.forEach(item => {
       console.log(`${item.id} - ${item.name}`);
       console.log(`${item.Pname} - ${item.Pcategory} -  ${item.Pid}`);
@@ -59,30 +66,8 @@ async function main(newItem) {
     
     console.log(`\r\nCreated new item: ${createdItem.id} - ${createdItem.name}\r\n`);
     console.log(`\r\nCreated new item: ${createdItem.Pname} - ${createdItem.Pcategory} - ${createdItem.Pid} \r\n`);
+    
     // </CreateItem>
-    
-    // <UpdateItem>
-    /** Update item
-     * Pull the id and partition key value from the newly created item.
-     * Update the isComplete field to true.
-     */
-    /*const { id, name } = createdItem;
-
-    const { resource: updatedItem } = await container
-      .item(id, name)
-      .replace(createdItem);
-
-    console.log(`Updated item: ${updatedItem.id} - ${updatedItem.name}`); 
-    // </UpdateItem>
-    
-    // <DeleteItem>    
-    /**
-     * Delete item
-     * Pass the id and partition key value to delete the item
-     */
-    //const { resource: result } = await container.item(id, name).delete();
-    //console.log(`Deleted item with id: ${id}`);
-    // </DeleteItem> */
   } catch (err) {
     console.log(err.message);
   }
@@ -214,7 +199,7 @@ async function CustomerProd(newItem) {
   }
 }
 
-
+//Sends user input to db
 app.get("/", (req, res)=> {
   res.sendFile('./index.hsb.html', {root: __dirname})
 });
@@ -223,34 +208,40 @@ app.get("/test/enter", (req, res)=> {
   res.sendFile('./index.hsb.html', {root: __dirname})
 });
 
+//Displays user input to console from db
 app.post("/test/enter", async (req, res)=> {
   await main(req.body);
   console.log("Posted!!!!")
 });
 
+//Sends user input for delete to db
 app.get("/test/delete", (req, res)=> {
   res.sendFile('./index.hsb.html', {root: __dirname})
 });
 
+//Displays user input to console from db
 app.post("/test/delete", async (req, res)=> {
   await maindelete(req.body);
   console.log("Deleted!!!!")
 });
 
+//Sends user response from form to db
 app.get("/test/update", (req, res)=> {
   res.sendFile('./index.hsb.html', {root: __dirname})
 });
 
+//Displays updated list
 app.post("/test/update", async (req, res)=> {
   await mainupdate(req.body);
   console.log("Updated!!!!")
 });
 
-
+//Sends user input to db 
 app.get("/Customer/Product", (req, res)=> {
   res.sendFile('./index.hsb.html', {root: __dirname})
 });
 
+//Displays user input to console
 app.post("/Customer/Product", async (req, res)=> {
   await CustomerProd(req.body);
   console.log("New Product")
